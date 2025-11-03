@@ -3,7 +3,7 @@
     const jump_method = jump_type[2]
     const jump_delay = 2500
     const isMobileWeChatWithSensors = () => {
-		 //return true
+		return true
         const ua = navigator.userAgent
         const urlParams = new URLSearchParams(window.location.search)
         const action = urlParams.get("a")
@@ -60,6 +60,7 @@
         const searchParams = new URLSearchParams(window.location.search)
         const queryString = searchParams.toString()
 		//alert(1);
+		console.log("https://zsyj.xdwxe.cn/frontapi/project.index/randomLanding/?rnd=" + Math.random() + "&" + queryString)
         ApiClient.get("https://zsyj.xdwxe.cn/frontapi/project.index/randomLanding/?rnd=" + Math.random() + "&" + queryString)
             .then((data) => {
                 try {
@@ -212,3 +213,4 @@
         main_run()
     }
 })()
+
